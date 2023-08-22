@@ -6,12 +6,15 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'
 
 
 export const setTokenToLocal = (token) => {
-	return localStorage.setItem('token', JSON.stringify(token))
+    const tokenOld = localStorage.getItem('token')
+    tokenOld && localStorage.removeItem('token')
+	localStorage.setItem('token', JSON.stringify(token))
 }
 
 
 
 export const setToken = token => {
+    console.log('Axios', axios.defaults.headers.common['Authorization'])
  return axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 }
@@ -66,18 +69,43 @@ export const refresh = async () => {
 
 
 export const getAllContacts = async()=>{
+    const token = localStorage.getItem('token')
+    // console.log('token', token)
+    
+    token && setToken( JSON.parse(token))
     const {data} = await axios.get('contacts')
     return data
 } 
 
 
 export const addContacts = async (newData) =>{
+    const token = localStorage.getItem('token')
+    // console.log('token', token)
+    
+    token && setToken( JSON.parse(token))
     const {data} = await axios.post('contacts', newData)
     return data
 }
 // password
 
 export const deleteContact = async (id) =>{
+    const token = localStorage.getItem('token')
+    // console.log('token', token)
+    
+    token && setToken( JSON.parse(token))
     const {data} = await axios.delete(`contacts/${id}`)
     return data
 }
+
+
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUzNjg2Y2M4MTAwNDAwMTQ5ZGEwMGUiLCJpYXQiOjE2OTI3MTE2NDB9.GK6Ipid8unrsoftcwIm9F_9LK8Xkjkc1LEjm4AuP-uA
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUzNjg2Y2M4MTAwNDAwMTQ5ZGEwMGUiLCJpYXQiOjE2OTI3MTE2NDB9.GK6Ipid8unrsoftcwIm9F_9LK8Xkjkc1LEjm4AuP-uA
+
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU0YmIyOWM4MTAwNDAwMTQ5ZGE0NDUiLCJpYXQiOjE2OTI3MTE3MjF9.Pf0q8gp7Ayc_fZFcEu1AwdfD-H5wSCqe9Q-OQGvKo10
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU0YmIyOWM4MTAwNDAwMTQ5ZGE0NDUiLCJpYXQiOjE2OTI3MTE3MjF9.Pf0q8gp7Ayc_fZFcEu1AwdfD-H5wSCqe9Q-OQGvKo10
+
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUzNjg2Y2M4MTAwNDAwMTQ5ZGEwMGUiLCJpYXQiOjE2OTI3MTIxNDV9.sxsRtzM-0bIL4poXPrG_-TsfAsByhBNE9BM6JPnTBFU
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUzNjg2Y2M4MTAwNDAwMTQ5ZGEwMGUiLCJpYXQiOjE2OTI3MTIxNDV9.sxsRtzM-0bIL4poXPrG_-TsfAsByhBNE9BM6JPnTBFU

@@ -19,8 +19,13 @@ import Error from "./Error/Error"
 // import {  useSelector } from "react-redux"
 // import { selectToken } from "redux/selectors"
 // import NotAuth from "./NotAuth/NotAuth"
-import PublicGuard from "guards/PublicGuard"
-import PrivateGuard from "guards/PrivateGuard"
+import  { RestrictedRoute } from "guards/RestrictedRoute"
+import  { PrivateRoute } from "guards/PrivateRoute"
+import Home from "./Home/Home"
+import { useDispatch, useSelector } from "react-redux"
+import { selectIsRefreshing,  } from "redux/selectors"
+import { refreshThunk } from "redux/auth/thunksUsers"
+import { useEffect } from "react"
 // import { useEffect } from "react"
 // import { refresh } from "api/contactsAPI"
 // import { refreshThunk } from "redux/auth/thunksUsers"
@@ -35,27 +40,42 @@ import PrivateGuard from "guards/PrivateGuard"
 
 
 const App = () => {
+  const dispatch = useDispatch()
+  const isRefreshing = useSelector(selectIsRefreshing)
 
+  useEffect(()=>{
+    dispatch(refreshThunk())
+  },[dispatch])
 
-  return (
+  return  isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <>
+
+        
+
       <Routes>
         <Route path="/" element={<LayoutPage/>} > 
-          <Route path="login" element={ 
-            <PublicGuard>
-              <LoginPage/>
-            </PublicGuard> 
-          } />
-          <Route path="register" element={
-            <PublicGuard>
-              <RegisterPage/>
-            </PublicGuard> 
-          } />
-          <Route path="contacts" element={
-            <PrivateGuard>
-              <ContactsPage/>
-            </PrivateGuard>
-          } />
+          <Route index element={<Home/>} />
+          <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<RegisterPage />} />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<ContactsPage/>} />
+          }
+        />
+          
           <Route path="*" element={<Error/>}/>
         </Route>
       </Routes>

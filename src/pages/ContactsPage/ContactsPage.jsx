@@ -6,13 +6,13 @@ import Loading from "components/Loading/Loading"
 import { Section } from "components/Section/Section"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { selectContacts, selectError, selectIsLoading,  } from "redux/selectors"
+import { selectContacts, selectError, selectIsLoading,   } from "redux/selectors"
 import { getAllContactsThunk } from "redux/thunks"
 
 const ContactsPage = () => {
     const dispatch = useDispatch()
   
-   
+
 
     const contacts = useSelector(selectContacts)
     

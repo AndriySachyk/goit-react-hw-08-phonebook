@@ -3,12 +3,13 @@ import { LinkForm, BtnForm, FormBox, InputForm, LabelForm, TitleForm } from '../
 import { useDispatch, useSelector } from 'react-redux'
 import { loginThunk } from 'redux/auth/thunksUsers'
 import { selectToken } from 'redux/selectors'
+import { useNavigate } from 'react-router-dom'
 // import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
   const token = useSelector(selectToken)
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
 
 
@@ -33,7 +34,7 @@ const LoginForm = () => {
 
     form.reset()
 
-    // navigate('/contacts')
+    navigate('/contacts')
   }
   return (
     <div>
