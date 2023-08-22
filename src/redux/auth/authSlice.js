@@ -1,18 +1,25 @@
 const { createSlice } = require("@reduxjs/toolkit");
-const { signupThunk,  } = require("./thunksUsers");
-const {  handleSignUpFulfilled } = require("redux/handlers");
+const { signupThunk, loginThunk,  refreshThunk,  } = require("./thunksUsers");
+// const {  handleSignUpFulfilled } = require("redux/handlers");
 
 
-const handleFulfilled = (state, { payload }) => {
+const handleFulfilledSindUp = (state, { payload }) => {
+    state.user = payload.user
 	state.token = payload.token
-	state.profile = payload.user
 }
 
+const handleFulfilledLogin = (state, {payload}) => {
+    state.token= payload.token
+    state.user = payload.user
+}
 
+const handleFulfilledRefresh = (state, {payload}) => {
+    state.token = payload.token
+}
 
 const initialState = {
-	token: '',
 	profile: null,
+	token: '',
 }
 
 
@@ -20,20 +27,21 @@ const authSlice = createSlice({
     name:'auth',
     initialState,
     reducers:{
-        logOut(state){
+        LogOut(state){
             state.isLoading = false
 			state.error = ''
 			state.token = ''
-			state.profile = null
+			state.user = null
         }
     },
     extraReducers: (builder)=>
     builder
-        .addCase(signupThunk.fulfilled, handleFulfilled)
-        // .addCase(loginThunk.fulfilled, )
+        .addCase(signupThunk.fulfilled, handleFulfilledSindUp)
+        .addCase(loginThunk.fulfilled, handleFulfilledLogin)
+        .addCase(refreshThunk.fulfilled, handleFulfilledRefresh),
 
 }) 
 
 
 export const authReducer  = authSlice.reducer
-export const {logOut} = authSlice.actions
+export const {LogOut} = authSlice.actions

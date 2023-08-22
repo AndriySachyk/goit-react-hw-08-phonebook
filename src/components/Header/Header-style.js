@@ -3,9 +3,12 @@ import { styled } from "styled-components";
 
 
 export const HeaderContainer = styled.header`
-     height: 50px;
+     /* height: 50px; */
     background-color: #264037;
-    padding: 15px 25px;
+    padding-top: 15px;
+    padding-bottom: 25px;
+ 
+
 `
 
 
@@ -32,15 +35,19 @@ export const UserName = styled.h2`
 
 
 export const Title = styled.h1`
-
     color: #b0fbdf;
     display: block;
+    text-align: center;
     margin: 0;
  
 `
 
+export const HeaderBtnBox = styled.div`
+    display: flex;
+    gap: 15px;
+`
 export const HeaderBtn = styled.button`
-    width: 75px;
+    /* width: 75px; */
     height: 30px;
     font-size: 18px;
     background-color: #264037;

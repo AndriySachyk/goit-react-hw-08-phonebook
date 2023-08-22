@@ -16,19 +16,46 @@ import LoginPage from "pages/LoginPage/LoginPage"
 import RegisterPage from "pages/RegisterPage/RegisterPage"
 import { Route, Routes } from "react-router-dom"
 import Error from "./Error/Error"
+// import {  useSelector } from "react-redux"
+// import { selectToken } from "redux/selectors"
+// import NotAuth from "./NotAuth/NotAuth"
+import PublicGuard from "guards/PublicGuard"
+import PrivateGuard from "guards/PrivateGuard"
+// import { useEffect } from "react"
+// import { refresh } from "api/contactsAPI"
+// import { refreshThunk } from "redux/auth/thunksUsers"
+// import { useDispatch } from "react-redux"
 
 
 
 // import React from 'react'
 
+
+
+
+
 const App = () => {
+
+
   return (
     <>
       <Routes>
         <Route path="/" element={<LayoutPage/>} > 
-          <Route path="login" element={<LoginPage/>} />
-          <Route path="register" element={<RegisterPage/>} />
-          <Route path="contacts" element={<ContactsPage/>} />
+          <Route path="login" element={ 
+            <PublicGuard>
+              <LoginPage/>
+            </PublicGuard> 
+          } />
+          <Route path="register" element={
+            <PublicGuard>
+              <RegisterPage/>
+            </PublicGuard> 
+          } />
+          <Route path="contacts" element={
+            <PrivateGuard>
+              <ContactsPage/>
+            </PrivateGuard>
+          } />
           <Route path="*" element={<Error/>}/>
         </Route>
       </Routes>

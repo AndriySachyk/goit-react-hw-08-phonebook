@@ -1,15 +1,23 @@
-import React from 'react'
+// import React, { useEffect } from 'react'
 import { BtnForm, FormBox, InputForm, LabelForm, LinkForm, TitleForm } from '../Form-style'
 import { signupThunk } from 'redux/auth/thunksUsers';
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector, } from 'react-redux';
+import { selectToken } from 'redux/selectors';
+// import { selectToken } from 'redux/selectors';
+// import { useNavigate } from 'react-router-dom';
 
 
 
 const SignUpForm = () => {
 
+  const token = useSelector(selectToken)
+  
+  // const navigation = useNavigate()
+  
+  // console.log('navigation', navigation)
+  // const token = useSelector(selectToken)
+  
   const dispatch = useDispatch()
-
 
 
   const handleSubmit = event => {
@@ -34,12 +42,17 @@ const SignUpForm = () => {
 
     dispatch(signupThunk(body))
       form.reset()
-      
     };
+
+
+
+   
+
+
 
   return (
     
-    <FormBox onSubmit={handleSubmit} >
+    <FormBox onSubmit={handleSubmit} autoComplete="" >
           <TitleForm>SignUp</TitleForm>
             <LabelForm htmlFor="email">
               Email
@@ -68,7 +81,7 @@ const SignUpForm = () => {
                   
                 />
             </LabelForm>
-            <LinkForm to={'/login'}>Login</LinkForm>
+            {!token && <LinkForm to={'/login'}>Login</LinkForm>}
             <BtnForm id='btn-sub' type='submit'>SignUp</BtnForm>
         </FormBox>
   )
