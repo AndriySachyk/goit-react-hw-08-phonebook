@@ -1,6 +1,5 @@
 const { createSlice } = require("@reduxjs/toolkit");
 const { signupThunk, loginThunk,  refreshThunk,  } = require("./thunksUsers");
-// const {  handleSignUpFulfilled } = require("redux/handlers");
 
 
 const handleFulfilledSindUp = (state, { payload }) => {
@@ -21,13 +20,14 @@ const handlePendingRefresh = (state) => {
  }
 
 const handleFulfilledRefresh = (state, {payload}) => {
-    state.user = payload.user
+    console.log('payload', payload)
+    state.user = payload
     state.isLoggedIn = true;
     state.isRefreshing = false;
 }
 
-const handleRejectedRefresh = (state) => { 
-    state.isRefreshing = false;   
+const handleRejectedRefresh = (state) => {
+    state.isRefreshing = false;  
  }
 
 const initialState = {
@@ -42,7 +42,7 @@ const authSlice = createSlice({
     initialState,
     reducers:{
         LogOut(state){
-            state.user = { name: null, email: null };
+            state.user = null;
             state.token = null;
             state.isLoggedIn = false;
         }

@@ -1,19 +1,13 @@
 import React from 'react'
 import { LinkForm, BtnForm, FormBox, InputForm, LabelForm, TitleForm } from '../Form-style'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, } from 'react-redux'
 import { loginThunk } from 'redux/auth/thunksUsers'
-import { selectToken } from 'redux/selectors'
-import { useNavigate } from 'react-router-dom'
-// import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
-  const token = useSelector(selectToken)
-
-  const navigate = useNavigate()
 
 
 
-  console.log('token', token)
+
 
   const dispatch = useDispatch()
   
@@ -27,14 +21,12 @@ const LoginForm = () => {
       email: form.elements.email.value,
       password: form.elements.password.value
     }
-    console.log('body', body)
   
     dispatch(loginThunk(body))
   
 
     form.reset()
 
-    navigate('/contacts')
   }
   return (
     <div>

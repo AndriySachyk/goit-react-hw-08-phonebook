@@ -1,6 +1,6 @@
 
 import { TailSpin } from  'react-loader-spinner'
-import { BoxLoading } from './Loading-style'
+import { BoxLoading } from './LoadingContacts-style'
 
 
 const Loading = () => {

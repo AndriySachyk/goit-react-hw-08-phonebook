@@ -10,11 +10,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter  basename="/goit-react-hw-05-movies" > 
-        <App />
+      <BrowserRouter basename="/goit-react-hw-08-phonebook"  > 
+        <Provider store={store}>
+            <App />
+        </Provider>
       </BrowserRouter>
-    </Provider>
   </React.StrictMode>
 );
 

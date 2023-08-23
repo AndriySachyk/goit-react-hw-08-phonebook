@@ -4,7 +4,7 @@ import { useDispatch,   } from 'react-redux';
 import { deleteContactsThunk } from 'redux/thunks';
 
 
-export const ListContactItem = ({name, phone, id,}) => {
+export const ListContactItem = ({name, number, id,}) => {
     const dispatch = useDispatch()
     
     const handleDelete = ()=>{
@@ -18,7 +18,7 @@ export const ListContactItem = ({name, phone, id,}) => {
     return (
         <>
             <ItemContact key={id}>
-                {name}: {phone}
+                {name}: {number}
                 <ButtonDelete onClick={handleDelete}>Delete</ButtonDelete>
             </ItemContact>
         </>
@@ -27,6 +27,6 @@ export const ListContactItem = ({name, phone, id,}) => {
 
 ListContactItem.propTypes = {
     name: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
 }

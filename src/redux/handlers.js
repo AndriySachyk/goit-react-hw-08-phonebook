@@ -19,7 +19,7 @@ export const handleRejected =(state, {error})=>{
 
 export const handleContactFulfilled =(state, {payload})=>{
     Notiflix.Notify.info(`You have ${payload.length} contacts`);
-    console.log('payload', payload)
+    // console.log('payload', payload)
     state.items = payload    
 }
 

@@ -1,40 +1,18 @@
-// import {Section} from './Section/Section';
-// import { FormContact } from './FormContact/FormContact';
-// import {ListContact} from './ListContact/ListContact';
-// import {Filter} from './FilterContact/FilterContact';
-// import { useDispatch, useSelector, } from 'react-redux';
-// import { useEffect } from 'react';
-// import { getAllContactsThunk } from 'redux/thunks';
-// import { selectContacts, selectError, selectIsLoading } from 'redux/selectors';
-// import Loading from './Loading/Loading';
-// import Error from './Error/Error';
-// // import { selectContacts } from 'redux/selectors';
-
-import ContactsPage from "pages/ContactsPage/ContactsPage"
-import LayoutPage from "pages/LayoutPage/LayoutPage"
-import LoginPage from "pages/LoginPage/LoginPage"
-import RegisterPage from "pages/RegisterPage/RegisterPage"
 import { Route, Routes } from "react-router-dom"
-import Error from "./Error/Error"
-// import {  useSelector } from "react-redux"
-// import { selectToken } from "redux/selectors"
-// import NotAuth from "./NotAuth/NotAuth"
 import  { RestrictedRoute } from "guards/RestrictedRoute"
 import  { PrivateRoute } from "guards/PrivateRoute"
-import Home from "./Home/Home"
 import { useDispatch, useSelector } from "react-redux"
 import { selectIsRefreshing,  } from "redux/selectors"
 import { refreshThunk } from "redux/auth/thunksUsers"
-import { useEffect } from "react"
-// import { useEffect } from "react"
-// import { refresh } from "api/contactsAPI"
-// import { refreshThunk } from "redux/auth/thunksUsers"
-// import { useDispatch } from "react-redux"
+import { lazy, useEffect } from "react"
+import LoadingAuth from "./Loading/LoadingAuth/LoadingAuth"
 
-
-
-// import React from 'react'
-
+const LayoutPage = lazy(()=> import('../pages/LayoutPage/LayoutPage'))
+const Home = lazy(()=> import('../components/Home/Home'))
+const RegisterPage = lazy(()=> import('../pages/RegisterPage/RegisterPage'))
+const LoginPage = lazy(()=> import('../pages/LoginPage/LoginPage'))
+const ContactsPage = lazy(()=> import('../pages/ContactsPage/ContactsPage'))
+const Error = lazy(()=> import('../components/Error/Error'))
 
 
 
@@ -48,12 +26,12 @@ const App = () => {
   },[dispatch])
 
   return  isRefreshing ? (
-    <b>Refreshing user...</b>
+    
+      <LoadingAuth />
+
+     
   ) : (
     <>
-
-        
-
       <Routes>
         <Route path="/" element={<LayoutPage/>} > 
           <Route index element={<Home/>} />

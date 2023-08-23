@@ -47,7 +47,6 @@ export const HeaderBtnBox = styled.div`
     gap: 15px;
 `
 export const HeaderBtn = styled.button`
-    /* width: 75px; */
     height: 30px;
     font-size: 18px;
     background-color: #264037;

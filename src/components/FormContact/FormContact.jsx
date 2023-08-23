@@ -20,7 +20,7 @@ event.preventDefault();
 
   const newContact = {
     name: form.elements.name.value,
-    phone:form.elements.number.value,
+    number:form.elements.number.value,
 }
 
 if (contacts.find(
@@ -59,6 +59,7 @@ dispatch(addContactsThunk(newContact))
       <input
           type="tel"
           name="number"
+          id="number"
           placeholder="Enter a contact number"
           pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
@@ -70,29 +71,3 @@ dispatch(addContactsThunk(newContact))
 )
 }
     
-    
-    
-      // handleChange = ({ target }) => {
-      //   this.setState({
-      //     [target.name]: target.value, 
-      //   });
-      // };
-    
-    
-      // handleSubmit = event => {
-      //   event.preventDefault();
-    
-      //   this.props.createContact({
-      //     name: this.state.name,
-      //     number: this.state.number,
-      //   });
-      //   this.setState({
-      //     name: '',
-      //     number: '',
-      //   });
-      // };
-    
-    
-//     FormContact.propTypes = {
-//       createContact: PropTypes.func.isRequired,
-// }

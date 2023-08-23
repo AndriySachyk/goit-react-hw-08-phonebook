@@ -2,7 +2,7 @@ import Error from "components/Error/Error"
 import { Filter } from "components/FilterContact/FilterContact"
 import { FormContact } from "components/FormContact/FormContact"
 import { ListContact } from "components/ListContact/ListContact"
-import Loading from "components/Loading/Loading"
+import Loading from "components/Loading/LoadingContacts/LoadingContact/LoadingContacts"
 import { Section } from "components/Section/Section"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -21,7 +21,7 @@ const ContactsPage = () => {
     const error = useSelector(selectError)
     
     
-  console.log('contacts', contacts)
+  // console.log('contacts', contacts)
 
     useEffect(()=>{
       dispatch(getAllContactsThunk())

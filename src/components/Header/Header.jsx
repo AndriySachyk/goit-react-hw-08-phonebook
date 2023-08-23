@@ -1,5 +1,5 @@
 import {  HeaderContainer, HeaderBox, HeaderBtn, Title, UserName, HeaderBtnBox } from './Header-style'
-import { selectProfile, selectToken } from 'redux/selectors'
+import { selectIsLoggedIn, selectProfile,  } from 'redux/selectors'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { LogOut,  } from 'redux/auth/authSlice'
@@ -10,14 +10,14 @@ const Header = () => {
 
   const navigate = useNavigate()
   
-  const token = useSelector(selectToken)
 
   const user = useSelector(selectProfile)
 
-  console.log('user', user)
+  const isLoggedIn = useSelector(selectIsLoggedIn)
+
+
 
   const handleLogOut = () => { 
-    console.log('first')
     dispatch(LogOut())
     localStorage.removeItem('token')
     dellToken()
@@ -30,14 +30,14 @@ const Header = () => {
     <>
         <HeaderContainer>
           <HeaderBox>
-            { token  && <UserName>{user.name}</UserName>}
+            { isLoggedIn  && <UserName>{user.name}</UserName>}
         
               <Title >Phone Book</Title>
             <HeaderBtnBox>
               <HeaderBtn type='button' onClick={() =>
-                token ? handleLogOut() : navigate('/login')
-              } >{ token? "LogOut": "LogIn"}</HeaderBtn>
-              <HeaderBtn onClick={()=>navigate('/register')}>SignUp</HeaderBtn>
+                isLoggedIn ? handleLogOut() : navigate('/login')
+              } >{ isLoggedIn ? "LogOut": "LogIn"}</HeaderBtn>
+              {!isLoggedIn && <HeaderBtn onClick={()=>navigate('/register')}>SignUp</HeaderBtn>}
             </HeaderBtnBox>
             
           </HeaderBox>
